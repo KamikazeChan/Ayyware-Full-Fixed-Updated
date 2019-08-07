@@ -321,7 +321,8 @@ bool __stdcall CreateMoveClient_Hooked(/*void* self, int edx,*/ float frametime,
 	return false;
 }
 
-
+static int previousWidth = 0;
+static int previousHeight = 0;
 // Paint Traverse Hooked function
 void __fastcall PaintTraverse_Hooked(PVOID pPanels, int edx, unsigned int vguiPanel, bool forceRepaint, bool allowForce)
 {
@@ -329,6 +330,15 @@ void __fastcall PaintTraverse_Hooked(PVOID pPanels, int edx, unsigned int vguiPa
 
 	static unsigned int FocusOverlayPanel = 0;
 	static bool FoundPanel = false;
+
+	int width, height;
+	Interfaces::Engine->GetScreenSize(width, height);
+	if (width != previousWidth || height != previousHeight)
+	{
+		previousHeight = height;
+		previousWidth = width;
+		Render::Initialise();
+	}
 
 	if (!FoundPanel)
 	{
