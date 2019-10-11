@@ -531,19 +531,19 @@ public:
 	float GetInaccuracy()
 	{
 		typedef float(__thiscall* oInaccuracy)(PVOID);
-		return call_vfunc< oInaccuracy >(this, 469)(this);
+		return call_vfunc< oInaccuracy >(this, 478)(this);
 	}
 
 	float GetInnacc()
 	{
 		typedef float(__thiscall *OrigFn)(void *);
-		return call_vfunc<OrigFn>(this, 469)(this);
+		return call_vfunc<OrigFn>(this, 478)(this);
 	}
 
 	void UpdateAccPenalty() 
 	{
 		typedef void(__thiscall *OrigFn)(void *);
-		return call_vfunc<OrigFn>(this, 470)(this);
+		return call_vfunc<OrigFn>(this, 479)(this);
 	}
 
 	bool IsScoped(int x = 0)
@@ -556,7 +556,7 @@ public:
 		if (!this) return nullptr;
 
 		typedef CSWeaponInfo*(__thiscall* OriginalFn)(void*);
-		return  call_vfunc<OriginalFn>(this, 446)(this);
+		return  call_vfunc<OriginalFn>(this, 456)(this);
 	}
 };
 
@@ -786,10 +786,10 @@ public:
 		return(Origin + View);
 	}
 	Vector GetAimPunch() {
-		return *(Vector*)((DWORD)this + 0x00003018);
+		return *(Vector*)((DWORD)this + 0x302C);
 	}
 	bool IsImmune() {
-		return *(bool*)((DWORD)this + 0x000038A0);
+		return *(bool*)((DWORD)this + 0x392C);
 	}
 	ClientClass *GetClientClass2() {
 		PVOID Networkable = (PVOID)((DWORD)(this) + 0x8);
@@ -797,6 +797,6 @@ public:
 		return call_vfunc<Original>(Networkable, 2)(Networkable);
 	}
 	HANDLE GetWeaponHandle() {
-		return *(HANDLE*)((DWORD)this + 0x00002EE8);
+		return *(HANDLE*)((DWORD)this + 0x2EF8);
 	}
 };
