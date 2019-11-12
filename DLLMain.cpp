@@ -33,7 +33,7 @@ bool DoUnload;
 
 int InitialThread()
 {
-#ifdef AYY_DEBUG
+#ifdef _DEBUG
 	Utilities::OpenConsole("AyyWare");
 #endif
 	// Intro banner with info
