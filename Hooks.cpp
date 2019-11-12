@@ -54,34 +54,6 @@ namespace Hooks
 	Utilities::Memory::VMTManager VMTRenderView;
 };
 
-/*// Initialise all our hooks
-void Hooks::Initialise()
-{
-// Panel hooks for drawing to the screen via surface functions
-VMTPanel.Initialise((DWORD*)Interfaces::Panels);
-oPaintTraverse = (PaintTraverse_)VMTPanel.HookMethod((DWORD)&PaintTraverse_Hooked, Offsets::VMT::Panel_PaintTraverse);
-//Utilities::Log("Paint Traverse Hooked");
-
-// No Visual Recoil
-VMTPrediction.Initialise((DWORD*)Interfaces::Prediction);
-VMTPrediction.HookMethod((DWORD)&Hooked_InPrediction, 14);
-//Utilities::Log("InPrediction Hooked");
-
-// Chams
-VMTModelRender.Initialise((DWORD*)Interfaces::ModelRender);
-oDrawModelExecute = (DrawModelEx_)VMTModelRender.HookMethod((DWORD)&Hooked_DrawModelExecute, Offsets::VMT::ModelRender_DrawModelExecute);
-//Utilities::Log("DrawModelExecute Hooked");
-
-// Setup ClientMode Hooks
-//VMTClientMode.Initialise((DWORD*)Interfaces::ClientMode);
-//VMTClientMode.HookMethod((DWORD)&CreateMoveClient_Hooked, 24);
-//Utilities::Log("ClientMode CreateMove Hooked");
-
-// Setup client hooks
-VMTClient.Initialise((DWORD*)Interfaces::Client);
-oCreateMove = (CreateMoveFn)VMTClient.HookMethod((DWORD)&hkCreateMove, 21);
-}*/
-
 // Undo our hooks
 void Hooks::UndoHooks()
 {
@@ -137,6 +109,7 @@ void SetClanTag(const char* tag, const char* name)//190% paste
 	static auto pSetClanTag = reinterpret_cast<void(__fastcall*)(const char*, const char*)>(((DWORD)Utilities::Memory::FindPattern("engine.dll", (PBYTE)"\x53\x56\x57\x8B\xDA\x8B\xF9\xFF\x15", "xxxxxxxxx")));
 	pSetClanTag(tag, name);
 }
+
 void NoClantag()
 {
 	SetClanTag("", "");
@@ -244,7 +217,7 @@ bool __stdcall CreateMoveClient_Hooked(/*void* self, int edx,*/ float frametime,
 		//	CUserCmd* pCmd = &cmdlist[sequence_number % 150];
 
 
-			// Backup for safety
+		// Backup for safety
 		Vector origView = pCmd->viewangles;
 		Vector viewforward, viewright, viewup, aimforward, aimright, aimup;
 		Vector qAimAngles;
@@ -359,8 +332,6 @@ void __fastcall PaintTraverse_Hooked(PVOID pPanels, int edx, unsigned int vguiPa
 		// Update and draw the menu
 		Menu::DoUIFrame();
 	}
-	Interfaces::Panels->SetMouseInputEnabled(vguiPanel, m_bIsOpen);
-	//window->m_bIsOpen
 }
 
 // InPrediction Hooked Function
@@ -754,10 +725,8 @@ void GetViewModelFOV(float& fov)
 
 	if (Interfaces::Engine->IsConnected() && Interfaces::Engine->IsInGame())
 	{
-
 		if (!localplayer)
 			return;
-
 
 		if (Menu::Window.VisualsTab.Active.GetState())
 		fov += Menu::Window.VisualsTab.OtherViewmodelFOV.GetValue();
