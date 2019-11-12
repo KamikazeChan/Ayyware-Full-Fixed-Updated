@@ -60,10 +60,8 @@ int InitialThread()
 	Utilities::Log("Ready");
 
 	// While our cheat is running
-	while (DoUnload == false)
-	{
+	while (!DoUnload)
 		Sleep(1000);
-	}
 
 	Hooks::UndoHooks();
 	Sleep(2000); // Make sure none of our hooks are running
