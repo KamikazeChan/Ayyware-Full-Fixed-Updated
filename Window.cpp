@@ -67,16 +67,7 @@ void CWindow::Close()
 void CWindow::Toggle()
 {
 	m_bIsOpen = !m_bIsOpen;
-	if (m_bIsOpen)
-	{
-		Interfaces::CVar->FindVar("cl_mouseenable")->SetValue(0);
-		Interfaces::InputSystem->EnableInput(false);
-	}
-	else
-	{
-		Interfaces::CVar->FindVar("cl_mouseenable")->SetValue(1);
-		Interfaces::InputSystem->EnableInput(true);
-	}
+	Interfaces::InputSystem->EnableInput(!m_bIsOpen);
 }
 
 bool CWindow::isOpen()
