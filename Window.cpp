@@ -70,11 +70,6 @@ void CWindow::Toggle()
 	Interfaces::InputSystem->EnableInput(!m_bIsOpen);
 }
 
-bool CWindow::isOpen()
-{
-	return m_bIsOpen;
-}
-
 CControl* CWindow::GetFocus()
 {
 	return FocusedControl;
