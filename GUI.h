@@ -89,7 +89,6 @@ public:
 	void Open();
 	void Close();
 	void Toggle();
-	bool isOpen();
 	CControl* GetFocus();
 
 	void RegisterTab(CTab* Tab);
