@@ -23,27 +23,10 @@ CGUI::CGUI()
 // Draws all windows 
 void CGUI::Draw()
 {
-	bool ShouldDrawCursor = false;
-
 	for (auto window : Windows)
 	{
 		if (m_bIsOpen)
-		{
-			ShouldDrawCursor = true;
 			DrawWindow(window);
-		}
-
-	}
-
-	if (ShouldDrawCursor)
-	{
-		static Vertex_t MouseVt[3];
-
-		MouseVt[0].Init(Vector2D(Mouse.x, Mouse.y));
-		MouseVt[1].Init(Vector2D(Mouse.x + 16, Mouse.y));
-		MouseVt[2].Init(Vector2D(Mouse.x, Mouse.y + 16));
-
-		Render::PolygonOutline(3, MouseVt, Color(0, 0, 0, 0), Color(0, 0, 0, 0));
 	}
 }
 
@@ -268,19 +251,15 @@ POINT CGUI::GetMouse()
 
 bool CGUI::DrawWindow(CWindow* window)
 {
+	// Main Window
 	Render::Outline(window->m_x, window->m_y, window->m_iWidth, window->m_iHeight, Color(21, 21, 21, 80));
 	Render::GradientV(window->m_x + 2, window->m_y + 2, window->m_iWidth - 4, 26, Color(45, 40, 40, 255), Color(45, 45, 40, 255));
 	Render::Clear(window->m_x + 2, window->m_y + 2 + 26, window->m_iWidth - 4, window->m_iHeight - 4 - 26, Color(49, 42, 42, 255));
 	Render::Outline(window->m_x + 1, window->m_y + 1, window->m_iWidth - 2, window->m_iHeight - 2, Color(49, 42, 42, 255));
-	// Main Window
-	/*Render::Outline(window->m_x, window->m_y, window->m_iWidth, window->m_iHeight, Color(21, 21, 21, 80));
-	Render::GradientV(window->m_x + 2, window->m_y + 2, window->m_iWidth - 4, 26, Color(2, 78, 0, 255), Color(7, 255, 37, 255));
-	Render::Clear(window->m_x + 2, window->m_y + 2 + 26, window->m_iWidth - 4, window->m_iHeight - 4 - 26, Color(7, 255, 37, 255));
-	Render::Outline(window->m_x + 1, window->m_y + 1, window->m_iWidth - 2, window->m_iHeight - 2, Color(91, 242, 0, 255));*/
+
 	Render::Text(window->m_x + 8, window->m_y + 8, Color(255, 0, 0, 255), Render::Fonts::MenuBold, window->Title.c_str());
 
 	//Inner
-	//Render::Outline(window->m_x + 7, window->m_y + 1 + 26, window->m_iWidth - 4 - 10, window->m_iHeight - 2 - 6 - 26, Color(255, 255, 255, 80));
 	Render::Clear(window->m_x + 8, window->m_y + 1 + 27, window->m_iWidth - 4 - 12, window->m_iHeight - 2 - 8 - 26, Color(30, 30, 30, 255));
 
 	//Tab
