@@ -79,7 +79,6 @@ public:
 	char pad_0x01F4[0x638]; //0x01F4
 };
 
-
 enum class CSGOClassID
 {
 	CAI_BaseNPC = 0,
@@ -677,7 +676,7 @@ public:
 	CNETVAR_FUNC(float, GetLowerBodyYaw, 0xE6996CCF); //m_flLowerBodyYawTarget
 	CNETVAR_FUNC(int, GetFlags, 0xE456D580); //m_fFlags
 	CNETVAR_FUNC(float, GetTargetYaw, 0xE6996CCF)
-		CNETVAR_FUNC(Vector, GetOrigin, 0x1231CE10); //m_vecOrigin 0x0134
+	CNETVAR_FUNC(Vector, GetOrigin, 0x1231CE10); //m_vecOrigin 0x0134
 	CNETVAR_FUNC(Vector, GetRotation, 0x6BEA197A); //m_angRotation
 	CNETVAR_FUNC(int, GetTeamNum, 0xC08B6C6E); //m_iTeamNum
 	CNETVAR_FUNC(int, GetMaxHealth, 0xC52E1C28); //m_iMaxHealth
@@ -771,6 +770,7 @@ public:
 			CALL DWORD PTR DS : [EAX + 0x28]
 		}
 	}
+	
 	Vector GetAbsAngles2() {
 		__asm {
 			MOV ECX, this;
@@ -779,23 +779,26 @@ public:
 		}
 	}
 
-
 	Vector GetEyePosition() {
 		Vector Origin = *(Vector*)((DWORD)this + 0x138);
 		Vector View = *(Vector*)((DWORD)this + 0x108);
 		return(Origin + View);
 	}
+	
 	Vector GetAimPunch() {
 		return *(Vector*)((DWORD)this + 0x302C);
 	}
+	
 	bool IsImmune() {
 		return *(bool*)((DWORD)this + 0x392C);
 	}
+	
 	ClientClass *GetClientClass2() {
 		PVOID Networkable = (PVOID)((DWORD)(this) + 0x8);
 		using Original = ClientClass*(__thiscall*)(PVOID);
 		return call_vfunc<Original>(Networkable, 2)(Networkable);
 	}
+	
 	HANDLE GetWeaponHandle() {
 		return *(HANDLE*)((DWORD)this + 0x2EF8);
 	}
