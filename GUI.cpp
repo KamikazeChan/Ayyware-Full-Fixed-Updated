@@ -17,16 +17,32 @@ CGUI GUI;
 
 CGUI::CGUI()
 {
-
 }
 
 // Draws all windows 
 void CGUI::Draw()
 {
+	bool ShouldDrawCursor = false;
+
 	for (auto window : Windows)
 	{
-		if (m_bIsOpen)
+		if (window->m_bIsOpen)
+		{
+			ShouldDrawCursor = true;
 			DrawWindow(window);
+		}
+
+	}
+
+	if (ShouldDrawCursor)
+	{
+		static Vertex_t MouseVt[3];
+
+		MouseVt[0].Init(Vector2D(Mouse.x, Mouse.y));
+		MouseVt[1].Init(Vector2D(Mouse.x + 16, Mouse.y));
+		MouseVt[2].Init(Vector2D(Mouse.x, Mouse.y + 16));
+
+		Render::PolygonOutline(3, MouseVt, Color(0, 0, 0, 230), Color(0, 0, 0, 240));
 	}
 }
 
