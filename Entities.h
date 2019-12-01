@@ -530,19 +530,19 @@ public:
 	float GetInaccuracy()
 	{
 		typedef float(__thiscall* oInaccuracy)(PVOID);
-		return call_vfunc< oInaccuracy >(this, 478)(this);
+		return call_vfunc< oInaccuracy >(this, 479)(this);
 	}
 
 	float GetInnacc()
 	{
 		typedef float(__thiscall *OrigFn)(void *);
-		return call_vfunc<OrigFn>(this, 478)(this);
+		return call_vfunc<OrigFn>(this, 479)(this);
 	}
 
 	void UpdateAccPenalty() 
 	{
 		typedef void(__thiscall *OrigFn)(void *);
-		return call_vfunc<OrigFn>(this, 479)(this);
+		return call_vfunc<OrigFn>(this, 480)(this);
 	}
 
 	bool IsScoped(int x = 0)
@@ -555,7 +555,7 @@ public:
 		if (!this) return nullptr;
 
 		typedef CSWeaponInfo*(__thiscall* OriginalFn)(void*);
-		return  call_vfunc<OriginalFn>(this, 456)(this);
+		return  call_vfunc<OriginalFn>(this, 457)(this);
 	}
 };
 
