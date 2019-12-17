@@ -333,6 +333,8 @@ void __fastcall PaintTraverse_Hooked(PVOID pPanels, int edx, unsigned int vguiPa
 		// Update and draw the menu
 		Menu::DoUIFrame();
 	}
+	
+	Interfaces::Panels->SetMouseInputEnabled(vguiPanel, m_bIsOpen);
 }
 
 // InPrediction Hooked Function
