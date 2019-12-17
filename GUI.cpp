@@ -26,7 +26,7 @@ void CGUI::Draw()
 
 	for (auto window : Windows)
 	{
-		if (window->m_bIsOpen)
+		if (window->m_bIsOpen) //theres a very, very, very, very, very small anti paste lul
 		{
 			ShouldDrawCursor = true;
 			DrawWindow(window);
